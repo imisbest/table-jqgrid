@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.csw.dao.DeptDao">
+
+    <select id="queryAll" resultType="Dept">
+    select * from dept
+</select>
+    <delete id="deleteById">
+        delete from dept where id=#{deptid}
+    </delete>
+    <select id="queryById" resultType="Dept">
+        select * from dept where id=#{deptid}
+    </select>
+    <update id="update">
+        update dept set name=#{d.name} where id=#{d.id}
+    </update>
+    <insert id="add">
+        insert into dept values(#{d.id},#{d.name})
+    </insert>
+</mapper>

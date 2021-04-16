@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.csw.dao.EmpDao">
+    <resultMap type="Emp" id="xx">
+        <id column="eid" property="id"/>
+        <result column="ename" property="name"/>
+        <result column="iage" property="age"/>
+        <result column="esalary" property="salary"/>
+        <result column="eage" property="age"/>
+        <result column="ebir" property="bir"/>
+
+        <association property="dept" javaType="Dept">
+            <id column="did" property="id"/>
+            <result column="dname" property="name"/>
+        </association>
+    </resultMap>
+    <delete id="deleteBy">
+    delete from emp where did=#{deptid}
+	</delete>
+
+    <select id="queryCount" resultType="java.lang.Integer">
+		SELECT count(*) FROM emp where did=#{deptid}
+	</select>
+    <select id="count" resultType="java.lang.Integer">
+    SELECT count(*) FROM emp
+    </select>
+    <select id="queryCount2" resultType="java.lang.Integer">
+    SELECT count(*) FROM emp
+    </select>
+    <select id="queryAllAndByPage" resultMap="xx">
+		select e.id as eid,e.name as ename,
+		 e.salary as esalary,e.age as eage,e.bir as ebir,
+		 d.id as did,d.name as dname
+		 from emp e,dept d where e.did=d.id and did=#{deptid} limit #{firstIndex},#{pageSize}
+	</select>
+    <select id="queryAllAndByPage2" resultMap="xx">
+        select e.id as eid,e.name as ename,
+		 e.salary as esalary,e.age as eage,e.bir as ebir,
+		 d.id as did,d.name as dname
+		 from emp e,dept d where e.did=d.id limit #{firstIndex},#{rows}
+    </select>
+    <delete id="deleteByID">
+        delete from emp where id=#{id}
+    </delete>
+    <select id="queryById" resultType="Emp">
+        select * from emp where id=#{id}
+    </select>
+    <update id="update">
+        update emp set name=#{e.name},salary=#{e.salary},
+        age=#{e.age},bir=#{e.bir},did=#{e.did} where id=#{e.id}
+    </update>
+    <insert id="add">
+        insert into emp values(#{e.id},#{e.name},#{e.salary},#{e.age},#{e.bir},#{e.did})
+    </insert>
+</mapper>

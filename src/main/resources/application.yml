@@ -1,0 +1,22 @@
+server:
+  port: 8989
+  jsp-servlet:
+    init-parameters:
+      development: true  #jsp开发模式部署 支持热部署
+spring:
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://106.13.236.137:3306/empdeptpink?characterEncoding=UTF-8
+    #url: jdbc:mysql://106.13.206.17:3306/empDeptPink
+    username: root
+    password: 111
+
+mybatis:
+  mapper-locations: classpath:com/csw/mapper/*.xml
+  type-aliases-package: com.csw.entity # 别名 同样为 类名或者是类名首字母小写 User ===> User|user
